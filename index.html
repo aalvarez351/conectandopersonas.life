@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Hosting - Servicios de Alojamiento Web y Desarrollo</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #343a40;
+            --light-gray: #e9ecef;
+            --white: #ffffff;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo .fa-server {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 123, 255, 0.8), rgba(0, 80, 170, 0.8)), url('https://via.placeholder.com/1920x1080.png/007BFF/FFFFFF?text=Tech+Background') no-repeat center center/cover;
+            color: var(--white);
+            padding-top: 60px; /* Header offset */
+        }
+        
+        .hero-content {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary-color);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            background: var(--light-gray);
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        
+        .service-grid, .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card.interactive-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .card.interactive-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card .icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-card {
+             border-top: 5px solid var(--primary-color);
+        }
+        
+        .pricing-card.popular {
+            border-color: #FFC107;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.1) translateY(-10px);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--secondary-color);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+        }
+        
+        .pricing-card ul li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .pricing-card ul li .fa-check-circle {
+            color: #28a745;
+            position: absolute;
+            left: 0;
+            top: 4px;
+        }
+        
+        #about {
+            background: var(--white);
+        }
+
+        footer {
+            background: var(--text-color);
+            color: var(--white);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content p {
+            margin-bottom: 20px;
+        }
+        
+        .sponsor-logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #FFC107;
+        }
+        
+        .sponsor-logo .fa-star {
+            margin-right: 8px;
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .scroll-to-top.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .nav-links {
+                display: none; /* Simplification for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo"><i class="fas fa-server"></i> Alpha Hosting</a>
+            <ul class="nav-links">
+                <li><a href="#services" class="active">Servicios</a></li>
+                <li><a href="#pricing">Precios</a></li>
+                <li><a href="#web-dev">Desarrollo Web</a></li>
+                <li><a href="#about">Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Tu Presencia en Línea, Potenciada al Máximo</h1>
+                <p>Soluciones de Hosting Rápidas, Seguras y Confiables para tu Proyecto.</p>
+                <a href="#pricing" class="cta-button">Ver Planes de Hosting</a>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <h2 class="section-title">Nuestros Servicios de Hosting</h2>
+                <div class="service-grid">
+                    <div class="card interactive-card">
+                        <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <h3>Hosting de Alta Velocidad</h3>
+                        <p>Infraestructura optimizada con discos SSD NVMe y LiteSpeed Web Server para garantizar que tu sitio web cargue a la velocidad de la luz, mejorando la experiencia de usuario y el SEO.</p>
+                    </div>
+                    <div class="card interactive-card">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Seguridad Robusta</h3>
+                        <p>Protección multicapa con firewall, escaneo de malware en tiempo real, certificados SSL gratuitos y copias de seguridad automáticas diarias. Tu tranquilidad es nuestra prioridad.</p>
+                    </div>
+                    <div class="card interactive-card">
+                        <div class="icon"><i class="fas fa-headset"></i></div>
+                        <h3>Soporte Técnico 24/7</h3>
+                        <p>Nuestro equipo de expertos está disponible 24/7/365 para ayudarte con cualquier consulta o problema técnico. Hablamos tu idioma y resolvemos tus dudas rápidamente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" style="background-color: var(--light-gray);">
+            <div class="container">
+                <h2 class="section-title">Planes y Precios</h2>
+                <div class="pricing-grid">
+                    <div class="card pricing-card interactive-card">
+                        <h3>Plan Básico</h3>
+                        <div class="price">$5.99<span>/mes</span></div>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 1 Sitio Web</li>
+                            <li><i class="fas fa-check-circle"></i> 50 GB Almacenamiento SSD</li>
+                            <li><i class="fas fa-check-circle"></i> 10 Cuentas de Correo</li>
+                            <li><i class="fas fa-check-circle"></i> Certificado SSL Gratis</li>
+                            <li><i class="fas fa-check-circle"></i> Ancho de Banda Ilimitado</li>
+                        </ul>
+                        <a href="#" class="cta-button">Contratar Ahora</a>
+                    </div>
+                    <div class="card pricing-card popular interactive-card">
+                        <h3>Plan Profesional</h3>
+                        <div class="price">$9.99<span>/mes</span></div>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Sitios Web Ilimitados</li>
+                            <li><i class="fas fa-check-circle"></i> 100 GB Almacenamiento SSD</li>
+                            <li><i class="fas fa-check-circle"></i> Cuentas de Correo Ilimitadas</li>
+                            <li><i class="fas fa-check-circle"></i> Certificado SSL Gratis</li>
+                            <li><i class="fas fa-check-circle"></i> Copias de Seguridad Diarias</li>
+                        </ul>
+                        <a href="#" class="cta-button">Contratar Ahora</a>
+                    </div>
+                    <div class="card pricing-card interactive-card">
+                        <h3>Plan Empresarial</h3>
+                        <div class="price">$19.99<span>/mes</span></div>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Sitios Web Ilimitados</li>
+                            <li><i class="fas fa-check-circle"></i> 200 GB Almacenamiento NVMe</li>
+                            <li><i class="fas fa-check-circle"></i> Cuentas de Correo Ilimitadas</li>
+                            <li><i class="fas fa-check-circle"></i> Soporte Prioritario</li>
+                            <li><i class="fas fa-check-circle"></i> Recursos Dedicados</li>
+                        </ul>
+                        <a href="#" class="cta-button">Contratar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="web-dev">
+            <div class="container">
+                <h2 class="section-title">Creación de Páginas Web a Medida</h2>
+                <div class="service-grid">
+                    <div class="card interactive-card">
+                        <div class="icon"><i class="fas fa-palette"></i></div>
+                        <h3>Diseño UI/UX Moderno</h3>
+                        <p>Creamos interfaces atractivas y fáciles de usar, centradas en la experiencia del usuario para maximizar la conversión y la retención de clientes.</p>
+                    </div>
+                    <div class="card interactive-card">
+                        <div class="icon"><i class="fas fa-code"></i></div>
+                        <h3>Desarrollo Full-Stack</h3>
+                        <p>Desde sitios web corporativos estáticos hasta complejas aplicaciones web y tiendas de e-commerce, nuestro equipo de desarrollo domina las últimas tecnologías.</p>
+                    </div>
+                    <div class="card interactive-card">
+                        <div class="icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Optimización y SEO</h3>
+                        <p>No solo construimos tu web, la optimizamos para que sea rápida, segura y esté preparada para posicionarse en los motores de búsqueda desde el primer día.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" style="background-color: var(--white);">
+            <div class="container" style="text-align:center;">
+                <h2 class="section-title">Sobre Nosotros y la Tecnología</h2>
+                <p style="max-width: 800px; margin: auto;">
+                    En <strong>Alpha Hosting</strong>, nuestra misión es democratizar el acceso a tecnología de punta para individuos y empresas. Creemos que una presencia en línea robusta comienza con un hosting excepcional. Por eso, invertimos en infraestructura de última generación, utilizando servidores web LiteSpeed, almacenamiento NVMe y redes de alta capacidad para ofrecer un rendimiento inigualable. La seguridad es fundamental; implementamos firewalls a nivel de aplicación (WAF), sistemas de detección de intrusiones y protocolos de cifrado avanzados para proteger los datos de nuestros clientes. <br><br>
+                    Nuestro compromiso va más allá del hardware. Ofrecemos un panel de control intuitivo (cPanel) que simplifica la gestión de sitios web, dominios y correos electrónicos. Para los desarrolladores, proporcionamos acceso a SSH, Git, WP-CLI y múltiples versiones de PHP. Entendemos que el éxito de nuestros clientes es nuestro éxito, y por ello nuestro equipo de soporte técnico está compuesto por profesionales apasionados por la tecnología, listos para resolver cualquier desafío. Nos esforzamos por ser más que un proveedor; aspiramos a ser tu socio tecnológico de confianza.
+                </p>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>Un proyecto impulsado por la innovación y la tecnología.</p>
+            <p class="sponsor-logo">
+                <i class="fas fa-star"></i> Patrocinador Tecnológico Principal: alphatechadviser.cloud
+            </p>
+            <p>© 2024 Alpha Hosting. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <a href="#home" class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // Scroll to top button
+        const scrollToTopBtn = document.querySelector('.scroll-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Interactive cards animation on scroll
+        const cards = document.querySelectorAll('.interactive-card');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+</html>
